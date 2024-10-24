@@ -1,16 +1,27 @@
-# This is a sample Python script.
+import logging
+import os
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Create Logs directory if it doesn't exist
+log_dir = "Logs"
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
 
+# Set up logging
+log_file = os.path.join(log_dir, "sample.log")
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+logging.basicConfig(
+    filename=log_file,
+    level=logging.INFO,  # Log level
+    format='%(asctime)s - %(levelname)s - %(message)s',  # Log message format
+    datefmt='%Y-%m-%d %H:%M:%S'  # Date format in logs
+)
 
+# Create a logger instance
+logger = logging.getLogger()
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# Generate some logs
+logger.info("This is an info log message.")
+logger.warning("This is a warning log message.")
+logger.error("This is an error log message.")
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+print(f"Logs have been written to {log_file}")
